@@ -1,0 +1,947 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ayesha AI | AI Automation for Growing Businesses</title>
+  <meta name="description" content="Ayesha AI builds smart AI automation systems that help businesses save time, capture more leads, automate repetitive tasks, and work more efficiently.">
+  <meta name="theme-color" content="#07060B">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://ayesha-ai.com/">
+
+  <!-- Social sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ayesha-ai.com/">
+  <meta property="og:site_name" content="Ayesha AI">
+  <meta property="og:title" content="Ayesha AI | Stop Doing Manually What AI Can Automate">
+  <meta property="og:description" content="AI automation for small and growing businesses: AI agents, lead follow-up, customer communication and connected workflows.">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%237C3AED'/><stop offset='1' stop-color='%2306B6D4'/></linearGradient></defs><rect width='32' height='32' rx='9' fill='url(%23g)'/><path d='M10 21.5 16 10.5l6 11H10' fill='none' stroke='white' stroke-width='2' stroke-linejoin='round' opacity='.55'/><circle cx='16' cy='10.5' r='2.6' fill='white'/><circle cx='10' cy='21.5' r='2.6' fill='white'/><circle cx='22' cy='21.5' r='2.6' fill='white'/></svg>">
+
+  <!-- Fonts (free, Google Fonts) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,500..800&family=Geist:wght@400..600&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================================================
+       Design tokens: edit colors, fonts and spacing here
+       ========================================================= */
+    :root {
+      --bg: #07060B;
+      --surface: #0D0B14;
+      --surface-2: #14111F;
+      --border: #221E2F;
+      --border-strong: #342E47;
+      --fg: #F5F3FA;
+      --muted: #A29CB7;
+      --subtle: #7D7794;
+
+      --primary: #7C3AED;
+      --primary-hover: #8B5CF6;
+      --primary-soft: rgba(124, 58, 237, .14);
+      --primary-line: rgba(139, 92, 246, .45);
+
+      --accent: #06B6D4;
+      --accent-soft: rgba(6, 182, 212, .12);
+      --accent-line: rgba(34, 211, 238, .55);
+
+      --warn: #F87171;
+
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius: 14px;
+      --radius-sm: 10px;
+
+      --font-display: "Bricolage Grotesque", "Inter Tight", ui-sans-serif, system-ui, sans-serif;
+      --font-body: "Geist", Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+      --container: 1160px;
+      --gutter: clamp(20px, 5vw, 40px);
+      --section-y: clamp(88px, 12vw, 148px);
+      --ease: cubic-bezier(.2, .7, .2, 1);
+      --cycle: 5.2s; /* length of one loop of the workflow animation */
+    }
+
+    /* ---------- Base ---------- */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { background: var(--bg); scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+    main { overflow-x: clip; }
+    img, svg, iframe { display: block; max-width: 100%; }
+    a { color: inherit; }
+    ::selection { background: rgba(124, 58, 237, .45); color: #fff; }
+    :focus-visible { outline: 2px solid var(--primary-hover); outline-offset: 3px; border-radius: 6px; }
+    [id] { scroll-margin-top: 24px; }
+
+    .container {
+      width: 100%;
+      max-width: calc(var(--container) + var(--gutter) * 2);
+      margin-inline: auto;
+      padding-inline: var(--gutter);
+    }
+    .visually-hidden {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+    }
+
+    /* Icons (lucide-style line icons) */
+    .i { width: 18px; height: 18px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* ---------- Buttons ---------- */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: .55rem;
+      height: 46px; padding: 0 20px;
+      border: 1px solid transparent; border-radius: var(--radius-sm);
+      font: 500 15px/1 var(--font-body); letter-spacing: -.005em;
+      text-decoration: none; white-space: nowrap; cursor: pointer;
+      transition: background-color .2s var(--ease), border-color .2s var(--ease), box-shadow .25s var(--ease), transform .2s var(--ease), color .2s var(--ease);
+    }
+    .btn .i { width: 17px; height: 17px; }
+    .btn:active { transform: translateY(0); }
+    .btn:focus-visible { border-radius: var(--radius-sm); }
+    .btn-primary {
+      background: var(--primary); color: #fff;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 0 0 1px rgba(124,58,237,.6), 0 10px 30px -12px rgba(124,58,237,.85);
+    }
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 0 0 1px rgba(139,92,246,.85), 0 16px 40px -12px rgba(139,92,246,.9);
+      transform: translateY(-1px);
+    }
+    .btn-outline { background: rgba(255,255,255,.02); color: var(--fg); border-color: var(--border-strong); }
+    .btn-outline:hover { background: rgba(255,255,255,.06); border-color: #4A4262; }
+    .btn-lg { height: 54px; padding: 0 26px; font-size: 16px; }
+    .btn-sm { height: 38px; padding: 0 14px; font-size: 14px; }
+
+    /* ---------- Shared type ---------- */
+    .h2 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-weight: 650; font-stretch: 88%;
+      font-size: clamp(2.1rem, 4.6vw, 3.6rem);
+      line-height: 1.02; letter-spacing: -.032em;
+      text-wrap: balance;
+    }
+    .section-lead { margin: 0; max-width: 48ch; color: var(--muted); font-size: 17px; }
+
+    /* =========================================================
+       1. HERO
+       ========================================================= */
+    .hero {
+      position: relative; isolation: isolate;
+      padding-top: clamp(36px, 6vw, 80px);
+      padding-bottom: var(--section-y);
+    }
+    .hero-bg { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+    .hero-bg::before {
+      content: ""; position: absolute; inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,.075) 1px, transparent 1px);
+      background-size: 28px 28px;
+      -webkit-mask-image: radial-gradient(ellipse 75% 55% at 28% 18%, #000 15%, transparent 72%);
+              mask-image: radial-gradient(ellipse 75% 55% at 28% 18%, #000 15%, transparent 72%);
+    }
+    .hero-bg::after {
+      content: ""; position: absolute; left: -10%; right: -10%; top: -12%; height: 1000px;
+      background:
+        radial-gradient(620px 400px at 16% 16%, rgba(124,58,237,.30), transparent 70%),
+        radial-gradient(520px 380px at 90% 46%, rgba(6,182,212,.13), transparent 70%);
+    }
+
+    .brand {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 5px 14px 5px 5px;
+      border: 1px solid var(--border); border-radius: 999px;
+      background: rgba(13,11,20,.65);
+      -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+      font-size: 14px; color: var(--muted);
+    }
+    .brand-mark { width: 28px; height: 28px; border-radius: 8px; flex: none; }
+    .brand-name { color: var(--fg); font-weight: 600; }
+    .brand-sep { width: 1px; height: 14px; background: var(--border-strong); }
+
+    .hero-title {
+      margin: 28px 0 0;
+      font-family: var(--font-display);
+      font-weight: 700; font-stretch: 82%;
+      font-size: clamp(2.7rem, 8.6vw, 6.6rem);
+      line-height: .93; letter-spacing: -.04em;
+      background: linear-gradient(180deg, #FFFFFF 35%, #C8BFE7 100%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .hero-title span { display: block; text-wrap: balance; }
+    .hero-lead {
+      margin: 26px 0 0; max-width: 60ch;
+      font-size: clamp(17px, 1.55vw, 19px); line-height: 1.6; color: var(--muted);
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+
+    /* Demo video frame (YouTube placeholder) */
+    .demo {
+      position: relative; margin-top: clamp(52px, 7vw, 84px);
+      padding: 1px; border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(139,92,246,.5), rgba(255,255,255,.06) 42%, rgba(6,182,212,.28));
+      box-shadow: 0 40px 120px -40px rgba(124,58,237,.5);
+    }
+    .demo-inner {
+      position: relative; display: flex; flex-direction: column; overflow: hidden;
+      border-radius: calc(var(--radius-lg) - 1px);
+      background: linear-gradient(180deg, #100D19, #0A0911);
+    }
+    .demo-bar, .demo-foot { display: flex; align-items: center; gap: 12px 16px; padding: 13px 20px; font-size: 13.5px; color: var(--muted); }
+    .demo-bar { justify-content: space-between; border-bottom: 1px solid var(--border); }
+    .demo-foot { flex-wrap: wrap; border-top: 1px solid var(--border); }
+    .demo-name { display: flex; align-items: center; gap: 9px; color: var(--fg); font-weight: 500; }
+    .demo-name .i { width: 16px; height: 16px; color: var(--muted); }
+    .status { display: inline-flex; align-items: center; gap: 8px; color: var(--accent); font-weight: 500; }
+    .status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+    .demo-body {
+      flex: 1; display: grid; place-items: center;
+      padding: clamp(24px, 4vw, 52px) clamp(16px, 4vw, 52px);
+      background-image: radial-gradient(rgba(255,255,255,.045) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .play-icon {
+      width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center;
+      background: linear-gradient(135deg, var(--primary), var(--accent)); color: #fff;
+    }
+    .play-icon svg { width: 9px; height: 9px; margin-left: 1px; fill: currentColor; }
+    .demo-note { margin: 0; }
+    .demo-note a { color: var(--fg); text-underline-offset: 3px; }
+    .demo.is-playing .demo-inner { aspect-ratio: 16 / 9; }
+    .demo iframe { width: 100%; height: 100%; border: 0; }
+
+    /* Workflow diagram inside the demo frame */
+    .flow {
+      --h: 66px;
+      --start: 1.3s;
+      width: 100%; max-width: 1000px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(28px, 64px) auto minmax(28px, 64px) minmax(0, 1.15fr);
+      align-items: center;
+    }
+    .node {
+      display: flex; align-items: center; gap: 12px; min-width: 0;
+      padding: 12px 14px;
+      border: 1px solid var(--border-strong); border-radius: 12px;
+      background: rgba(20,17,31,.9);
+    }
+    .node-icon {
+      width: 38px; height: 38px; flex: none; display: grid; place-items: center;
+      border: 1px solid var(--border); border-radius: 10px;
+      background: rgba(255,255,255,.04); color: var(--muted);
+    }
+    .node-text { display: flex; flex-direction: column; min-width: 0; line-height: 1.3; }
+    .node-title { font-size: 14.5px; font-weight: 600; color: var(--fg); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .node-sub { font-size: 12.5px; color: var(--subtle); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .check {
+      width: 22px; height: 22px; margin-left: auto; flex: none; display: grid; place-items: center;
+      border-radius: 50%; background: var(--accent-soft); color: var(--accent);
+    }
+    .check .i { width: 13px; height: 13px; stroke-width: 2.6; }
+
+    .agent {
+      --agent-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 0 0 1px rgba(167,139,250,.55), 0 22px 60px -20px rgba(124,58,237,.95);
+      position: relative; z-index: 1;
+      width: clamp(132px, 14vw, 168px); aspect-ratio: 1;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+      border-radius: 26px; text-align: center; color: #fff;
+      background: radial-gradient(circle at 30% 18%, #A77BFF, #7C3AED 48%, #4C1D95);
+      box-shadow: var(--agent-shadow);
+    }
+    .agent .i { width: 26px; height: 26px; margin-bottom: 6px; }
+    .agent-text { display: flex; flex-direction: column; align-items: inherit; }
+    .agent-title { font-weight: 600; font-size: 15px; }
+    .agent-sub { font-size: 12.5px; color: rgba(255,255,255,.72); line-height: 1.3; }
+
+    .link { position: relative; height: 2px; border-radius: 2px; background: var(--border-strong); overflow: hidden; }
+    .link::after {
+      --t0: translateX(-100%); --t1: translateX(200%);
+      content: ""; position: absolute; top: 0; left: 0; width: 50%; height: 100%;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0;
+    }
+    .outputs { position: relative; display: grid; gap: 14px; padding-left: 26px; }
+    .outputs::before {
+      content: ""; position: absolute; left: 0; width: 2px; border-radius: 2px;
+      top: calc(var(--h) / 2); bottom: calc(var(--h) / 2);
+      background: var(--border-strong);
+    }
+    .out { position: relative; height: var(--h); border-color: var(--accent-line); }
+    .out::before {
+      content: ""; position: absolute; right: calc(100% + 1px); top: 50%;
+      width: 26px; height: 2px; margin-top: -1px; background: var(--accent-line);
+    }
+    .out .node-icon { color: var(--accent); background: var(--accent-soft); }
+
+    /* =========================================================
+       Cards (shared by sections 2 and 3)
+       ========================================================= */
+    .card {
+      position: relative; overflow: hidden;
+      padding: clamp(20px, 2.2vw, 26px);
+      border: 1px solid var(--border); border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,0)) , var(--surface);
+      transition: border-color .25s var(--ease), transform .25s var(--ease);
+    }
+    .card::before {
+      content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+      background: radial-gradient(380px circle at var(--mx, 50%) var(--my, -30%), rgba(139,92,246,.13), transparent 50%);
+      opacity: 0; transition: opacity .3s var(--ease);
+    }
+    .card > * { position: relative; }
+    @media (hover: hover) {
+      .card:hover { border-color: var(--border-strong); transform: translateY(-2px); }
+      .card:hover::before { opacity: 1; }
+    }
+    .card-title { margin: 0 0 8px; font-size: 18.5px; font-weight: 600; letter-spacing: -.012em; line-height: 1.3; }
+    .card-text { margin: 0; color: var(--muted); font-size: 15.5px; line-height: 1.6; max-width: 52ch; }
+
+    /* Small illustrative UI inside each card */
+    .mini {
+      position: relative; overflow: hidden;
+      height: 150px; margin-bottom: 22px; padding: 14px;
+      border: 1px solid var(--border); border-radius: 14px;
+      background: radial-gradient(rgba(255,255,255,.04) 1px, transparent 1px) 0 0 / 16px 16px, var(--bg);
+    }
+    .chip {
+      display: inline-flex; align-items: center; height: 27px; padding: 0 11px;
+      border: 1px dashed var(--border-strong); border-radius: 999px;
+      background: var(--surface-2); color: var(--muted);
+      font-size: 12.5px; white-space: nowrap;
+    }
+
+    /* =========================================================
+       2. PROBLEM
+       ========================================================= */
+    .section { position: relative; padding-block: var(--section-y); }
+    #solution { padding-bottom: clamp(64px, 8vw, 104px); }
+    .section::before {
+      content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: min(var(--container), 100% - 2 * var(--gutter)); height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
+    }
+    .section-head { display: grid; gap: 18px 56px; align-items: end; margin-bottom: clamp(40px, 6vw, 64px); }
+
+    .problem-grid { display: grid; gap: 16px; }
+
+    /* Mini: the same task, again and again */
+    .mini-repeat { display: flex; flex-direction: column; justify-content: center; gap: 7px; }
+    .task {
+      display: flex; align-items: center; gap: 10px; height: 31px; padding: 0 11px;
+      border: 1px solid var(--border); border-radius: 8px; background: var(--surface-2);
+      font-size: 13px; white-space: nowrap;
+    }
+    .task:nth-child(2) { opacity: .6; }
+    .task:nth-child(3) { opacity: .32; }
+    .task-box { width: 13px; height: 13px; flex: none; border: 1.5px solid var(--subtle); border-radius: 4px; }
+    .task-txt { overflow: hidden; text-overflow: ellipsis; }
+    .task time { margin-left: auto; color: var(--subtle); font-size: 12px; font-variant-numeric: tabular-nums; }
+
+    /* Mini: an unanswered message */
+    .mini-msg { display: flex; flex-direction: column; justify-content: center; gap: 10px; }
+    .msg { display: flex; gap: 10px; align-items: flex-start; }
+    .avatar {
+      width: 30px; height: 30px; flex: none; display: grid; place-items: center; border-radius: 50%;
+      background: #1F1A2E; border: 1px solid var(--border-strong);
+      font-size: 12.5px; font-weight: 600; color: var(--muted);
+    }
+    .msg-body { flex: 1; min-width: 0; padding: 8px 11px; border: 1px solid var(--border); border-radius: 4px 12px 12px 12px; background: var(--surface-2); }
+    .msg-head { display: flex; justify-content: space-between; gap: 8px; font-size: 12px; color: var(--subtle); }
+    .msg-head strong { color: var(--fg); font-weight: 600; }
+    .msg-body p { margin: 2px 0 0; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .msg-status {
+      display: inline-flex; align-items: center; gap: 7px; align-self: flex-start; margin-left: 40px;
+      padding: 3px 10px; border-radius: 999px; font-size: 12px; color: #FCA5A5;
+      background: rgba(248,113,113,.09); border: 1px solid rgba(248,113,113,.25);
+    }
+    .dot-warn { width: 6px; height: 6px; border-radius: 50%; background: var(--warn); }
+
+    /* Mini: tools scattered, nothing connected */
+    .mini-scatter .chip { position: absolute; left: var(--x); top: var(--y); transform: rotate(var(--r)); }
+
+    .bridge {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px;
+      margin: clamp(32px, 4vw, 44px) 0 0; font-size: 16.5px; color: var(--muted);
+    }
+    .bridge strong { color: var(--fg); font-weight: 500; }
+    .bridge-icon { width: 20px; height: 20px; color: var(--accent); }
+    .bridge a { color: var(--fg); font-weight: 500; text-decoration-color: var(--primary-line); text-underline-offset: 4px; }
+    .bridge a:hover { text-decoration-color: var(--accent); }
+
+    /* =========================================================
+       3. SOLUTION
+       ========================================================= */
+    .bento { display: grid; gap: 16px; }
+
+    /* Mini: agent task log */
+    .log { list-style: none; margin: 0; padding: 0; height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 10px; }
+    .log li { display: flex; align-items: center; gap: 10px; font-size: 13.5px; }
+    .log-ic { width: 20px; height: 20px; flex: none; display: grid; place-items: center; border-radius: 50%; background: var(--accent-soft); color: var(--accent); }
+    .log-ic .i { width: 12px; height: 12px; stroke-width: 2.6; }
+    .log .is-pending { color: var(--muted); }
+    .log .is-pending .log-ic { background: transparent; border: 1.5px dashed var(--accent-line); }
+    .log-meta { margin-left: auto; font-size: 12px; color: var(--subtle); white-space: nowrap; }
+
+    /* Mini: instant reply */
+    .chat { height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 8px; }
+    .bubble { max-width: 88%; padding: 8px 12px; border-radius: 12px; font-size: 13px; line-height: 1.45; }
+    .bubble-in { align-self: flex-start; background: var(--surface-2); border: 1px solid var(--border); border-bottom-left-radius: 4px; }
+    .bubble-out { align-self: flex-end; background: var(--primary-soft); border: 1px solid var(--primary-line); border-bottom-right-radius: 4px; color: #EDE9FE; }
+    .bubble-meta { display: flex; align-items: center; gap: 5px; margin-top: 3px; font-size: 11.5px; color: var(--subtle); }
+    .bubble-out .bubble-meta { color: var(--accent); }
+    .bubble-meta .i { width: 12px; height: 12px; }
+
+    /* Mini: follow-up stages (a real sequence) */
+    .steps { list-style: none; margin: 0; padding: 0; height: 100%; display: grid; grid-template-columns: repeat(4, 1fr); align-content: center; }
+    .steps li { position: relative; display: flex; flex-direction: column; align-items: center; gap: 12px; font-size: 12px; color: var(--muted); text-align: center; line-height: 1.25; }
+    .steps li::before {
+      content: ""; position: relative; z-index: 1; width: 12px; height: 12px; border-radius: 50%;
+      background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft);
+    }
+    .steps li::after { content: ""; position: absolute; top: 5px; left: 50%; width: 100%; height: 2px; background: var(--accent-line); }
+    .steps li:last-child { color: var(--fg); font-weight: 500; }
+    .steps li:last-child::before { background: var(--primary-hover); box-shadow: 0 0 0 4px var(--primary-soft); }
+    .steps li:last-child::after { display: none; }
+
+    /* Mini: tools connected */
+    .mini-connect { display: flex; align-items: center; justify-content: center; }
+    .mini-connect .chip { border-style: solid; border-color: var(--accent-line); background: rgba(6,182,212,.07); color: var(--fg); }
+    .wire { flex: 0 1 30px; min-width: 14px; height: 2px; background: var(--accent-line); }
+
+    /* Mini: time spent before / after */
+    .mini-bars { display: flex; flex-direction: column; justify-content: center; gap: 12px; }
+    .bar-row { display: grid; grid-template-columns: 50px 1fr; align-items: center; gap: 10px; font-size: 12.5px; color: var(--muted); }
+    .bar { height: 10px; border-radius: 999px; background: rgba(255,255,255,.05); overflow: hidden; }
+    .bar i { display: block; height: 100%; width: var(--w); border-radius: inherit; background: linear-gradient(90deg, #463F5C, #5E5678); }
+    .bar i.is-after { background: linear-gradient(90deg, var(--primary), var(--accent)); }
+    .bar-cap { margin: 0; font-size: 12px; color: var(--subtle); }
+
+    .card-outcome {
+      border-color: rgba(139,92,246,.35);
+      background: radial-gradient(120% 90% at 100% 0%, rgba(124,58,237,.22), transparent 60%), var(--surface);
+    }
+
+    /* Final call to action + booking */
+    .cta {
+      position: relative; isolation: isolate; overflow: hidden;
+      display: grid; grid-template-columns: minmax(0, 1fr); gap: 40px;
+      margin-top: clamp(64px, 9vw, 112px);
+      padding: clamp(22px, 4.5vw, 56px);
+      border: 1px solid transparent; border-radius: var(--radius-xl);
+      background:
+        linear-gradient(var(--surface), var(--surface)) padding-box,
+        linear-gradient(135deg, rgba(139,92,246,.75), rgba(255,255,255,.08) 42%, rgba(6,182,212,.6)) border-box;
+    }
+    .cta::before {
+      content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+      background:
+        radial-gradient(520px 360px at 0% 0%, rgba(124,58,237,.26), transparent 70%),
+        radial-gradient(420px 300px at 100% 100%, rgba(6,182,212,.1), transparent 70%);
+    }
+    .cta-title { font-size: clamp(2.3rem, 5vw, 4rem); line-height: .98; }
+    .cta-lead { margin: 20px 0 0; max-width: 44ch; font-size: 18px; color: var(--muted); }
+    .cta .btn { margin-top: 30px; }
+    .cta-points { list-style: none; margin: 32px 0 0; padding: 0; display: grid; gap: 12px; }
+    .cta-points li { display: flex; align-items: flex-start; gap: 11px; font-size: 15.5px; color: var(--fg); }
+    .cta-points .log-ic { margin-top: 2px; }
+
+    /* Calendly booking area */
+    .booking {
+      position: relative; min-width: 0; overflow: hidden;
+      border: 1px solid var(--border-strong); border-radius: 18px; background: var(--bg);
+    }
+
+    /* =========================================================
+       Responsive layout
+       ========================================================= */
+    @media (min-width: 640px) {
+      .bento { grid-template-columns: repeat(2, 1fr); }
+      .b-e { grid-column: 1 / -1; }
+    }
+    @media (min-width: 880px) {
+      .problem-grid { grid-template-columns: repeat(3, 1fr); }
+      .bento { grid-template-columns: repeat(6, 1fr); }
+      .b-a, .b-b { grid-column: span 3; }
+      .b-c, .b-d, .b-e { grid-column: span 2; }
+    }
+    @media (min-width: 900px) {
+      .section-head { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+      .demo-inner { aspect-ratio: 16 / 9; }
+    }
+    @media (min-width: 980px) {
+      .cta { grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); align-items: center; gap: 56px; }
+    }
+    @media (min-width: 1100px) {
+      .flow { --h: 80px; }
+      .node { gap: 14px; padding: 16px 18px; border-radius: 14px; }
+      .node-icon { width: 44px; height: 44px; border-radius: 11px; }
+      .node-title { font-size: 16px; }
+      .node-sub { font-size: 13.5px; }
+      .outputs { gap: 18px; padding-left: 30px; }
+      .out::before { width: 30px; }
+      .check { width: 26px; height: 26px; }
+      .agent { width: 196px; border-radius: 30px; }
+      .agent .i { width: 30px; height: 30px; }
+      .agent-title { font-size: 17px; }
+      .agent-sub { font-size: 13.5px; }
+    }
+    @media (max-width: 879px) {
+      .mini:not(.mini-scatter) { height: auto; min-height: 136px; display: flex; flex-direction: column; justify-content: center; }
+      .mini .log, .mini .chat, .mini .steps { height: auto; width: 100%; }
+      .mini.mini-connect { flex-direction: row; align-items: center; }
+    }
+
+    /* Workflow diagram stacks vertically on smaller screens */
+    @media (max-width: 859px) {
+      .flow { grid-template-columns: 1fr; max-width: 440px; }
+      .link { width: 2px; height: 26px; justify-self: center; }
+      .link::after { --t0: translateY(-100%); --t1: translateY(200%); width: 100%; height: 50%; background: linear-gradient(180deg, transparent, var(--accent), transparent); }
+      .agent { width: auto; aspect-ratio: auto; justify-self: center; flex-direction: row; gap: 12px; padding: 14px 20px; border-radius: 16px; text-align: left; }
+      .agent .i { margin: 0; width: 22px; height: 22px; }
+      .agent-text { display: flex; flex-direction: column; }
+      .outputs { padding-left: 0; gap: 8px; }
+      .outputs::before, .out::before { display: none; }
+      .flow { --h: 62px; }
+    }
+    @media (max-width: 520px) {
+      .hero-actions .btn, .cta .btn { width: 100%; }
+      .brand-tag { display: none; }
+      .brand-sep { display: none; }
+      .demo-bar, .demo-foot { padding-inline: 16px; }
+      .demo-foot .btn { width: 100%; }
+      .cta .btn { white-space: normal; height: auto; min-height: 54px; padding-block: 14px; line-height: 1.3; }
+      .cta .booking { margin-inline: calc(-1 * clamp(22px, 4.5vw, 56px)); border-inline: 0; border-radius: 0; }
+    }
+
+    /* =========================================================
+       Motion: one page-load sequence + the workflow loop
+       ========================================================= */
+    @media (prefers-reduced-motion: no-preference) {
+      .rise { animation: rise .8s var(--ease) both; animation-delay: var(--d, 0ms); }
+
+      .status-dot { animation: ping 2s ease-out infinite; }
+
+      .trigger { animation: trigger-on var(--cycle) var(--ease) var(--start) infinite both; }
+      .link-in::after { animation: pass-in var(--cycle) linear var(--start) infinite both; }
+      .agent { animation: agent-pulse var(--cycle) var(--ease) var(--start) infinite both; }
+      .link-out::after { animation: pass-out var(--cycle) linear var(--start) infinite both; }
+      .outputs::before { animation: rail-on var(--cycle) var(--ease) var(--start) infinite both; }
+      .out, .out::before, .out .node-icon, .out .check {
+        animation-duration: var(--cycle);
+        animation-timing-function: var(--ease);
+        animation-delay: calc(var(--start) + var(--i) * .26s);
+        animation-iteration-count: infinite;
+        animation-fill-mode: both;
+      }
+      .out { animation-name: out-on; }
+      .out::before { animation-name: tick-on; }
+      .out .node-icon { animation-name: icon-on; }
+      .out .check { animation-name: check-on; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; }
+    }
+
+    @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+    @keyframes ping { 0% { box-shadow: 0 0 0 0 rgba(6,182,212,.55); } 70%, 100% { box-shadow: 0 0 0 7px rgba(6,182,212,0); } }
+
+    @keyframes trigger-on {
+      0% { border-color: var(--border-strong); box-shadow: none; }
+      4%, 18% { border-color: var(--accent-line); box-shadow: 0 0 0 4px var(--accent-soft); }
+      28%, 100% { border-color: var(--border-strong); box-shadow: none; }
+    }
+    @keyframes pass-in {
+      0%, 4% { transform: var(--t0); opacity: 0; }
+      6%, 19% { opacity: 1; }
+      22%, 100% { transform: var(--t1); opacity: 0; }
+    }
+    @keyframes agent-pulse {
+      0%, 20% { box-shadow: var(--agent-shadow); }
+      28% { box-shadow: var(--agent-shadow), 0 0 0 8px rgba(124,58,237,.22), 0 0 70px rgba(139,92,246,.65); }
+      42%, 100% { box-shadow: var(--agent-shadow); }
+    }
+    @keyframes pass-out {
+      0%, 28% { transform: var(--t0); opacity: 0; }
+      30%, 38% { opacity: 1; }
+      41%, 100% { transform: var(--t1); opacity: 0; }
+    }
+    @keyframes rail-on {
+      0%, 38% { background: var(--border-strong); }
+      42%, 86% { background: var(--accent-line); }
+      94%, 100% { background: var(--border-strong); }
+    }
+    @keyframes out-on {
+      0%, 40% { border-color: var(--border-strong); box-shadow: none; }
+      45%, 86% { border-color: var(--accent-line); box-shadow: 0 0 0 4px var(--accent-soft); }
+      94%, 100% { border-color: var(--border-strong); box-shadow: none; }
+    }
+    @keyframes tick-on {
+      0%, 40% { background: var(--border-strong); }
+      44%, 86% { background: var(--accent-line); }
+      94%, 100% { background: var(--border-strong); }
+    }
+    @keyframes icon-on {
+      0%, 40% { color: var(--muted); background: rgba(255,255,255,.04); }
+      45%, 86% { color: var(--accent); background: var(--accent-soft); }
+      94%, 100% { color: var(--muted); background: rgba(255,255,255,.04); }
+    }
+    @keyframes check-on {
+      0%, 41% { opacity: 0; transform: scale(.5); }
+      47%, 86% { opacity: 1; transform: scale(1); }
+      94%, 100% { opacity: 0; transform: scale(.5); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Shared logo, referenced with <use href="#logo"> -->
+  <svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="logo-gradient" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#7C3AED"/>
+        <stop offset="1" stop-color="#06B6D4"/>
+      </linearGradient>
+      <symbol id="logo" viewBox="0 0 32 32">
+        <rect width="32" height="32" rx="9" fill="url(#logo-gradient)"/>
+        <path d="M10 21.5 16 10.5l6 11H10" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round" opacity=".55"/>
+        <circle cx="16" cy="10.5" r="2.6" fill="#fff"/>
+        <circle cx="10" cy="21.5" r="2.6" fill="#fff"/>
+        <circle cx="22" cy="21.5" r="2.6" fill="#fff"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <main>
+
+    <!-- =====================================================
+         SECTION 1: HERO
+         ===================================================== -->
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="container">
+
+        <div class="brand rise" style="--d:0ms">
+          <svg class="brand-mark" aria-hidden="true"><use href="#logo"/></svg>
+          <span class="brand-name">Ayesha AI</span>
+          <span class="brand-sep" aria-hidden="true"></span>
+          <span class="brand-tag">AI automation for growing businesses</span>
+        </div>
+
+        <h1 class="hero-title rise" id="hero-title" style="--d:80ms">
+          <span>Stop Doing Manually</span>
+          <span>What AI Can Automate.</span>
+        </h1>
+
+        <p class="hero-lead rise" style="--d:160ms">
+          Ayesha AI builds smart AI automation systems that help businesses save time, capture more leads, automate repetitive tasks, and work more efficiently — without adding more people to the workload.
+        </p>
+
+        <div class="hero-actions rise" style="--d:240ms">
+          <a class="btn btn-primary btn-lg" href="#book">
+            <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 2v4M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+            Book a Free Call
+          </a>
+          <a class="btn btn-outline btn-lg" href="#demo">
+            <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m10 8 6 4-6 4z"/></svg>
+            See How It Works
+          </a>
+        </div>
+
+        <!-- YouTube video placeholder.
+             Set CONFIG.youtubeId in the script at the bottom of this file to enable playback. -->
+        <div class="demo rise" id="demo" style="--d:380ms">
+          <div class="demo-inner">
+            <div class="demo-bar">
+              <span class="demo-name">
+                <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect width="8" height="8" x="3" y="3" rx="2"/><path d="M7 11v4a2 2 0 0 0 2 2h4"/><rect width="8" height="8" x="13" y="13" rx="2"/></svg>
+                Lead follow-up workflow
+              </span>
+              <span class="status"><span class="status-dot" aria-hidden="true"></span>Running</span>
+            </div>
+
+            <div class="demo-body">
+              <div class="flow" role="img" aria-label="Example workflow: a new website lead is qualified by an AI agent, which sends a WhatsApp reply, updates the CRM and books a call.">
+                <div class="node trigger" aria-hidden="true">
+                  <span class="node-icon">
+                    <svg class="i" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>
+                  </span>
+                  <span class="node-text">
+                    <span class="node-title">New lead</span>
+                    <span class="node-sub">Website form, 9:41 PM</span>
+                  </span>
+                </div>
+
+                <div class="link link-in" aria-hidden="true"></div>
+
+                <div class="agent" aria-hidden="true">
+                  <svg class="i" viewBox="0 0 24 24"><path d="M9.94 15.5A2 2 0 0 0 8.5 14.06l-6.14-1.58a.5.5 0 0 1 0-.96L8.5 9.94A2 2 0 0 0 9.94 8.5l1.58-6.14a.5.5 0 0 1 .96 0l1.58 6.14a2 2 0 0 0 1.44 1.44l6.14 1.58a.5.5 0 0 1 0 .96l-6.14 1.58a2 2 0 0 0-1.44 1.44l-1.58 6.14a.5.5 0 0 1-.96 0z"/><path d="M20 3v4M22 5h-4"/></svg>
+                  <span class="agent-text">
+                    <span class="agent-title">AI agent</span>
+                    <span class="agent-sub">Qualifies and replies</span>
+                  </span>
+                </div>
+
+                <div class="link link-out" aria-hidden="true"></div>
+
+                <div class="outputs" aria-hidden="true">
+                  <div class="node out" style="--i:0">
+                    <span class="node-icon"><svg class="i" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></span>
+                    <span class="node-text"><span class="node-title">Reply sent</span><span class="node-sub">WhatsApp, in seconds</span></span>
+                    <span class="check"><svg class="i" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>
+                  </div>
+                  <div class="node out" style="--i:1">
+                    <span class="node-icon"><svg class="i" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg></span>
+                    <span class="node-text"><span class="node-title">CRM updated</span><span class="node-sub">Lead qualified and tagged</span></span>
+                    <span class="check"><svg class="i" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>
+                  </div>
+                  <div class="node out" style="--i:2">
+                    <span class="node-icon"><svg class="i" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m9 16 2 2 4-4"/></svg></span>
+                    <span class="node-text"><span class="node-title">Call booked</span><span class="node-sub">Added to Google Calendar</span></span>
+                    <span class="check"><svg class="i" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="demo-foot">
+              <button class="btn btn-outline btn-sm" type="button" id="play-demo">
+                <span class="play-icon" aria-hidden="true"><svg viewBox="0 0 10 10"><path d="M1 0.5 9.5 5 1 9.5z"/></svg></span>
+                Watch the demo
+              </button>
+              <p class="demo-note" id="demo-note" aria-live="polite">Example: a website lead, answered and booked while you're offline.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =====================================================
+         SECTION 2: PROBLEM
+         ===================================================== -->
+    <section class="section" id="problem" aria-labelledby="problem-title">
+      <div class="container">
+
+        <div class="section-head">
+          <h2 class="h2" id="problem-title">Your business is growing. So is the busywork.</h2>
+          <p class="section-lead">If your week looks like this, you're not behind. You're doing by hand what the right system could handle for you.</p>
+        </div>
+
+        <div class="problem-grid">
+
+          <article class="card">
+            <div class="mini mini-repeat" aria-hidden="true">
+              <div class="task"><span class="task-box"></span><span class="task-txt">Copy lead into spreadsheet</span><time>9:02</time></div>
+              <div class="task"><span class="task-box"></span><span class="task-txt">Copy lead into spreadsheet</span><time>11:47</time></div>
+              <div class="task"><span class="task-box"></span><span class="task-txt">Copy lead into spreadsheet</span><time>3:15</time></div>
+            </div>
+            <h3 class="card-title">Too Much Manual Work</h3>
+            <p class="card-text">Your team spends hours copying data, replying to repetitive messages, following up with leads, and performing tasks that could be automated.</p>
+          </article>
+
+          <article class="card">
+            <div class="mini mini-msg" aria-hidden="true">
+              <div class="msg">
+                <span class="avatar">S</span>
+                <div class="msg-body">
+                  <div class="msg-head"><strong>Sara M.</strong><time>9:14 PM</time></div>
+                  <p>Is the 2-bedroom still available?</p>
+                </div>
+              </div>
+              <span class="msg-status"><span class="dot-warn"></span>No reply yet</span>
+            </div>
+            <h3 class="card-title">Leads Get Lost</h3>
+            <p class="card-text">Potential customers contact you, but slow responses and missed follow-ups mean valuable leads can disappear before anyone responds.</p>
+          </article>
+
+          <article class="card">
+            <div class="mini mini-scatter" aria-hidden="true">
+              <span class="chip" style="--x:6%;--y:12%;--r:-5deg">Gmail</span>
+              <span class="chip" style="--x:44%;--y:8%;--r:4deg">WhatsApp</span>
+              <span class="chip" style="--x:24%;--y:41%;--r:2deg">Sheets</span>
+              <span class="chip" style="--x:68%;--y:38%;--r:-6deg">CRM</span>
+              <span class="chip" style="--x:5%;--y:68%;--r:3deg">Calendar</span>
+              <span class="chip" style="--x:50%;--y:70%;--r:-3deg">Notes</span>
+            </div>
+            <h3 class="card-title">Your Business Doesn't Run Efficiently</h3>
+            <p class="card-text">Important processes are scattered across different tools, spreadsheets, emails, and messaging platforms, making everyday operations slower and harder to manage.</p>
+          </article>
+
+        </div>
+
+        <p class="bridge">
+          <svg class="i bridge-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.94 15.5A2 2 0 0 0 8.5 14.06l-6.14-1.58a.5.5 0 0 1 0-.96L8.5 9.94A2 2 0 0 0 9.94 8.5l1.58-6.14a.5.5 0 0 1 .96 0l1.58 6.14a2 2 0 0 0 1.44 1.44l6.14 1.58a.5.5 0 0 1 0 .96l-6.14 1.58a2 2 0 0 0-1.44 1.44l-1.58 6.14a.5.5 0 0 1-.96 0z"/></svg>
+          <span><strong>The good news:</strong> every one of these can be solved with the right automation.</span>
+          <a href="#solution">See the solution</a>
+        </p>
+
+      </div>
+    </section>
+
+    <!-- =====================================================
+         SECTION 3: SOLUTION
+         ===================================================== -->
+    <section class="section" id="solution" aria-labelledby="solution-title">
+      <div class="container">
+
+        <div class="section-head">
+          <h2 class="h2" id="solution-title">Automation built around how your business already works.</h2>
+          <p class="section-lead">We design and build AI systems around the tools you already use, so your team gets hours back without changing how they work.</p>
+        </div>
+
+        <div class="bento">
+
+          <article class="card b-a">
+            <div class="mini" aria-hidden="true">
+              <ul class="log">
+                <li><span class="log-ic"><svg class="i" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>Invoice details extracted<span class="log-meta">AI agent</span></li>
+                <li><span class="log-ic"><svg class="i" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>Customer record updated<span class="log-meta">AI agent</span></li>
+                <li class="is-pending"><span class="log-ic"></span>Drafting weekly report<span class="log-meta">In progress</span></li>
+              </ul>
+            </div>
+            <h3 class="card-title">AI-Powered Automation</h3>
+            <p class="card-text">Automate repetitive business tasks using AI agents and intelligent workflows.</p>
+          </article>
+
+          <article class="card b-b">
+            <div class="mini" aria-hidden="true">
+              <div class="chat">
+                <div class="bubble bubble-in">
+                  Are you open this Sunday?
+                  <span class="bubble-meta">11:48 PM</span>
+                </div>
+                <div class="bubble bubble-out">
+                  Yes, from 10am to 6pm. Want me to reserve a table for you?
+                  <span class="bubble-meta"><svg class="i" viewBox="0 0 24 24"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>Instant reply</span>
+                </div>
+              </div>
+            </div>
+            <h3 class="card-title">Faster Customer Responses</h3>
+            <p class="card-text">Build automated systems that respond to customers and leads quickly, even outside business hours.</p>
+          </article>
+
+          <article class="card b-c">
+            <div class="mini" aria-hidden="true">
+              <ol class="steps">
+                <li>Captured</li>
+                <li>Qualified</li>
+                <li>Followed up</li>
+                <li>Booked</li>
+              </ol>
+            </div>
+            <h3 class="card-title">Automated Lead Follow-Up</h3>
+            <p class="card-text">Capture, organize, qualify, and follow up with leads automatically.</p>
+          </article>
+
+          <article class="card b-d">
+            <div class="mini mini-connect" aria-hidden="true">
+              <span class="chip">Gmail</span>
+              <span class="wire"></span>
+              <span class="chip">Sheets</span>
+              <span class="wire"></span>
+              <span class="chip">CRM</span>
+            </div>
+            <h3 class="card-title">Connected Business Systems</h3>
+            <p class="card-text">Connect the tools your business already uses so information moves between them automatically.</p>
+          </article>
+
+          <article class="card card-outcome b-e">
+            <div class="mini mini-bars" aria-hidden="true">
+              <div class="bar-row"><span>Before</span><span class="bar"><i style="--w:92%"></i></span></div>
+              <div class="bar-row"><span>After</span><span class="bar"><i class="is-after" style="--w:30%"></i></span></div>
+              <p class="bar-cap">Time spent on repetitive tasks</p>
+            </div>
+            <h3 class="card-title">Save Time &amp; Scale</h3>
+            <p class="card-text">Reduce repetitive work so you and your team can focus on higher-value tasks and business growth.</p>
+          </article>
+
+        </div>
+
+        <!-- Final call to action + Calendly booking -->
+        <div class="cta" id="book">
+          <div class="cta-copy">
+            <h3 class="h2 cta-title">Ready to Put Your Business on Autopilot?</h3>
+            <p class="cta-lead">Let's build an automation system that saves you time and helps your business grow.</p>
+            <a class="btn btn-primary btn-lg" href="#calendar">
+              <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 2v4M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+              Book Your Free Automation Call
+            </a>
+            <ul class="cta-points">
+              <li><span class="log-ic" aria-hidden="true"><svg class="i" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>Free 30-minute video call</li>
+              <li><span class="log-ic" aria-hidden="true"><svg class="i" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>We map where your team loses the most time</li>
+              <li><span class="log-ic" aria-hidden="true"><svg class="i" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span>You leave with a clear plan for your first automation</li>
+            </ul>
+          </div>
+
+          <div class="booking" id="calendar" aria-label="Book a free automation call">
+            <!-- Calendly inline widget begin -->
+            <div class="calendly-inline-widget" data-url="https://calendly.com/ayeshaazeem0107" style="min-width:320px;height:700px;"></div>
+            <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+            <!-- Calendly inline widget end -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    /* =========================================================
+       CONFIG: add your YouTube video ID here
+       ========================================================= */
+    const CONFIG = {
+      // Your YouTube video ID. For https://www.youtube.com/watch?v=AbC123xyz use "AbC123xyz"
+      youtubeId: ""
+    };
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    /* ---------- Demo video ---------- */
+    (function setupDemo() {
+      const demo = document.getElementById("demo");
+      const button = document.getElementById("play-demo");
+      const note = document.getElementById("demo-note");
+
+      button.addEventListener("click", () => {
+        if (CONFIG.youtubeId) {
+          const iframe = document.createElement("iframe");
+          iframe.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(CONFIG.youtubeId) + "?autoplay=1&rel=0&modestbranding=1";
+          iframe.title = "Ayesha AI automation demo";
+          iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+          iframe.allowFullscreen = true;
+          demo.classList.add("is-playing");
+          demo.querySelector(".demo-inner").replaceChildren(iframe);
+          iframe.focus();
+        } else {
+          note.innerHTML = 'The demo video is on its way. <a href="#calendar">Book a free call</a> and we\u2019ll walk you through it live.';
+        }
+      });
+    })();
+
+    /* ---------- Card spotlight that follows the pointer ---------- */
+    if (!reduceMotion && window.matchMedia("(hover: hover)").matches) {
+      document.querySelectorAll(".card").forEach((card) => {
+        card.addEventListener("pointermove", (e) => {
+          const r = card.getBoundingClientRect();
+          card.style.setProperty("--mx", e.clientX - r.left + "px");
+          card.style.setProperty("--my", e.clientY - r.top + "px");
+        });
+      });
+    }
+  </script>
+</body>
+</html>
